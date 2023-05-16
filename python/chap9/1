@@ -1,0 +1,20 @@
+from bs4 import BeautifulSoup
+import requests #http 요청처리 library
+
+#뉴스 크롤링
+headers={'User-Agent' :'Dongyang Mirae Univ'}
+webpage=requests.get('https://n.news.naver.com/article/015/0004844821?cds=news_media_pc&type=editn',headers=headers)
+print(webpage)
+
+
+soup=BeautifulSoup(webpage.content,"html.parser")
+print(soup) #dic_area
+
+news=soup.select_one('#dic_area').get_text().strip()
+print(news)
+
+webpage=requests.get('https://n.news.naver.com/article/015/0004844867?sid=100',headers=headers)
+print(webpage)
+soup=BeautifulSoup(webpage.content,"html.parser")
+news=soup.select_one('#dic_area').get_text().strip()
+
